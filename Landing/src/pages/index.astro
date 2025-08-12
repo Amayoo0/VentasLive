@@ -1,16 +1,39 @@
 ---
-
+import Header from "../components/Header.astro";
+import "../styles/global.css";
 ---
 
-<html lang="en">
+<!doctype html>
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Landing — Esqueleto</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<Header />
+
+		<main>
+			<section id="hero" aria-labelledby="hero-title">
+				<div class="container">
+					<h1 id="hero-title">Inicio</h1>
+					<!-- Aquí añadirás el contenido del hero -->
+				</div>
+			</section>
+
+			<section id="features" aria-labelledby="features-title">
+				<div class="container">
+					<h2 id="features-title">Características</h2>
+					<!-- Esqueleto de la sección de features -->
+				</div>
+			</section>
+
+			<section id="contact" aria-labelledby="contact-title">
+				<div class="container">
+					<h2 id="contact-title">Contacto</h2>
+					<!-- Esqueleto de la sección de contacto -->
+				</div>
+			</section>
+		</main>
 	</body>
 </html>
