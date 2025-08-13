@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Label } from './ui/label';
 import { Input } from './ui/input';
+import { Button } from './ui/button';
 
 
 export default function ContactForm() {
@@ -10,15 +11,25 @@ export default function ContactForm() {
         urgency: "",
     });
 
-    function handleSubmit(e: React.FormEvent){
+    async function handleSubmit(e: React.FormEvent){
         e.preventDefault();
-        console.log("Form submitted:", form);
-        alert("Datos enviados correctamente");
-        setForm({
-            contact: "",
-            description: "",
-            urgency: "",
+        const res = await fetch('/api/estimate-hours', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                description: form.description,
+            }),
         });
+        const data = await res.json();
+        if (!res.ok) {
+            console.error("Error al obtener la estimación de horas:", data);
+            alert("Error al procesar la solicitud. Por favor, inténtalo de nuevo.");
+            return;
+        }
+        alert("Estimación de horas: " + data.hours);
+        setForm({ contact: "", description: "", urgency: "" });
     }
 
     return (
@@ -53,6 +64,8 @@ export default function ContactForm() {
                     required
                 />
             </div>
+
+            <Button type="submit">Enviar</Button>
         </form>
     )
 }
