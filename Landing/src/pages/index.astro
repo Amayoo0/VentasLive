@@ -1,4 +1,5 @@
 ---
+import ContactForm from "@/components/ContactForm";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
 ---
@@ -31,7 +32,7 @@ import "../styles/global.css";
 			<section id="contact" aria-labelledby="contact-title">
 				<div class="container">
 					<h2 id="contact-title">Contacto</h2>
-					<!-- Esqueleto de la sección de contacto -->
+					<ContactForm client:load />
 				</div>
 			</section>
 		</main>
