@@ -1,3 +1,4 @@
+@import "tailwindcss";
 :root {
     --header-height: 48px;
     /* cabecera pequeña */
