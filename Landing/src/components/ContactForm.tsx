@@ -9,10 +9,10 @@ export default function ContactForm() {
         contact: "",
         description: "",
         urgency: "",
+        price: "",
     });
 
-    async function handleSubmit(e: React.FormEvent){
-        e.preventDefault();
+    async function estimateHours() {
         const res = await fetch('/api/estimate-hours', {
             method: 'POST',
             headers: {
@@ -29,7 +29,46 @@ export default function ContactForm() {
             return;
         }
         alert("Estimación de horas: " + data.hours);
-        setForm({ contact: "", description: "", urgency: "" });
+    }
+
+    async function estimatePrice() {
+        const res = await fetch('/api/estimate-price', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                description: form.description,
+                urgency: form.urgency,
+            }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+            console.error("Error al obtener la estimación de precio:", data);
+            alert("Error al procesar la solicitud. Por favor, inténtalo de nuevo.");
+            return;
+        }
+        setForm({ ...form, price: data.price });
+        alert("Estimación de precio: " + data.price + " euros");
+    }
+
+
+    async function handleSubmit(e: React.FormEvent){
+        e.preventDefault();
+        const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(form),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+            console.error("Error al enviar el formulario:", data);
+            alert("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
+            return;
+        }
+        setForm({ contact: "", description: "", urgency: "", price: "" });
     }
 
     return (
@@ -64,8 +103,20 @@ export default function ContactForm() {
                     required
                 />
             </div>
+            <div>
+                <Label htmlFor="price">Precio</Label>
+                <Input
+                    id="price"
+                    value={form.price}
+                    onChange={(e) => setForm({ ...form, price: e.target.value })}
+                    placeholder="Realice una estimación de precio por adelantado"
+                />
+            </div>
 
-            <Button type="submit">Enviar</Button>
+
+            <Button onClick={estimateHours} type="button">Estimar horas</Button>
+            <Button onClick={estimatePrice} type="button">Estimar precio</Button>
+            <Button onClick={handleSubmit} type="submit">Enviar</Button>
         </form>
     )
 }
