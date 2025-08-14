@@ -14,24 +14,28 @@ import "../styles/global.css";
 	<body>
 		<Header />
 
-		<main>
-			<section id="hero" aria-labelledby="hero-title">
-				<div class="container">
-					<h1 id="hero-title">Inicio</h1>
-					<!-- Aquí añadirás el contenido del hero -->
+		<main class="bg-gray-50">
+			<section id="hero" aria-labelledby="hero-title" class="py-20">
+				<div class="container mx-auto px-4 text-center">
+					<h1 id="hero-title" class="text-4xl font-bold mb-4">Inicio</h1>
+					<p class="mt-4 text-lg text-gray-700">
+						Esta es una landing page de ejemplo. Aquí puedes añadir información sobre tu producto o servicio.
+					</p>
 				</div>
 			</section>
 
-			<section id="features" aria-labelledby="features-title">
-				<div class="container">
-					<h2 id="features-title">Características</h2>
-					<!-- Esqueleto de la sección de features -->
+			<section id="projects" aria-labelledby="features-title" class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<h2 id="projects-title" class="text-3xl font-semibold mb-6">Proyectos</h2>
+					<p class="mt-4 text-lg text-gray-700">
+						Aquí puedes mostrar algunos de tus proyectos destacados. Utiliza tarjetas o listas para presentar la información de manera clara.
+					</p>
 				</div>
 			</section>
 
-			<section id="contact" aria-labelledby="contact-title">
-				<div class="container">
-					<h2 id="contact-title">Contacto</h2>
+			<section id="contact" aria-labelledby="contact-title" class="py-20 bg-gray-100">
+				<div class="container mx-auto px-4">
+					<h2 id="contact-title" class="text-3xl font-semibold mb-6">Contacto</h2>
 					<ContactForm client:load />
 				</div>
 			</section>
