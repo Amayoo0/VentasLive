@@ -59,7 +59,7 @@ export default function ContactForm() {
             alert("Por favor, completa todos los campos obligatorios.");
             return;
         }
-        const res = await fetch('/api/contact', {
+        const res = await fetch('/api/send-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
